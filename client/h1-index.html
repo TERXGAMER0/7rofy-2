@@ -3,15 +3,15 @@
   <head>
     <title>خلية سباق الحروف - مجالات</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="logo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- واجهة التحقق من الرمز السري - مستوحاة من لعبة a1.html -->
+    <!-- واجهة التحقق من الرمز السري - نفس الواجهة الموجودة باللعبة الثانية -->
     <div id="secret-overlay">
       <div class="secret-container">
-        <h2>أدخل رمز التفعيل المجاني للدخول</h2>
+        <h2>أدخل رمز التفعيل للدخول</h2>
         <input type="text" id="secret-code" placeholder="الرمز السري" />
         <br />
         <button id="secret-submit">ادخال</button>
@@ -19,24 +19,27 @@
           رمز خاطئ، حاول مرة أخرى
         </p>
         <p style="font-size: 17px; margin-top: 10px">
-          اذا لم يكن لديك رمز تفعيل ، يمكنك الحصول عليه مجانًا في بوت في التيليجرام هذا هو الرابط
+          اذا لم يكن لديك رمز تفعيل ، يمكنك الحصول عليه مجانًا في بوت التيليجرام هذا هو الرابط
           <a href="https://t.me/ii40TSM_bot" target="_blank">اضغط هنا</a>
         </p>
       </div>
     </div>
 
-    <!-- باقي المحتوى الأصلي للعبة الثالثة -->
-    <form>
-      <input type="text" class="team1" placeholder="الفريق الاخضر">
-      <input type="text" class="team2" placeholder=" الفريق الاحمر">
-    </form>
-    
+    <!-- بقية المحتوى الأصلي للعبة الثالثة -->
+    <div>
+      <form>
+        <input type="text" class="team1" placeholder="الفريق الاخضر">
+        <input type="text" class="team2" placeholder="الفريق الاحمر">
+      </form>
+    </div>
+
     <div id="controls">
       <!-- زر إعادة توزيع الحروف -->
       <button id="shuffleLettersBtn" class="control-btn">حروف</button>
       <!-- زر إضافة المجالات -->
       <button id="addFieldsBtn" class="control-btn">مجالات</button>
     </div>
+
     <div id="gameDiv" style="display: 0;">
       <div class="trinagle-up" style="left:158px;border-left: 40px solid transparent !important;"></div>
       <div class="trinagle-up" style="left:245px;"></div>
@@ -44,33 +47,33 @@
       <div class="trinagle-up" style="left:455px;"></div>
       <div class="trinagle-up" style="left:560px;"></div>
       <div class="trinagle-up" style="left:665.5px;"></div>
-      
+
       <div class="trinagle-down" style="left:158px;border-left: 40px solid transparent !important;"></div>
       <div class="trinagle-down" style="left:245px;"></div>
       <div class="trinagle-down" style="left:349.5px;"></div>
       <div class="trinagle-down" style="left:455px;"></div>
       <div class="trinagle-down" style="left:560px;"></div>
       <div class="trinagle-down" style="left:665.5px;"></div>
-    
+
       <div class="trinagle-left" style="margin-top: 243px;"></div>
       <div class="trinagle-left" style="margin-top: 413px;"></div>
-    
+
       <div class="trinagle-right" style="margin-top: 158px;"></div>
       <div class="trinagle-right" style="margin-top: 328px;"></div>
       <div class="trinagle-right" style="margin-top: 498.5px;"></div>
-    
+
       <div class="end-left" style="margin-top: 99px;border-top: 81px solid transparent;"></div>
       <div class="end-left" style="margin-top: 529px;border-bottom: 81px solid transparent;"></div>
-    
+
       <div class="trinagle-down" style="left:147.2px;margin-top: 614px !important;border-width:50px;width: 100px !important;border-left: 10px solid transparent !important;"></div>
       <div class="trinagle-up" style="left:147.2px;margin-top: 100px !important;border-width:50px;width: 100px !important;border-right: 10px solid transparent !important;border-left: 20px solid transparent !important;"></div>	
-    
+
       <div class="end-right" style="margin-top: 99px;border-top: 81px solid transparent;"></div>
       <div class="end-right" style="margin-top: 504px;border-bottom: 78px solid transparent;"></div>
-    
+
       <div class="trinagle-down" style="left:147.2px;margin-top: 614px !important;border-width:50px;width: 100px !important;border-left: 10px solid transparent !important;"></div>
       <div class="trinagle-up" style="left:147.2px;margin-top: 100px !important;border-width:50px;width: 100px !important;border-right: 10px solid transparent !important;border-left: 20px solid transparent !important;"></div>	
-    
+
       <div class="hexbuttons">
         <div class="hexr">
           <div id="btn1" class="btn1" onclick="btnClick(this.id)"></div>
@@ -114,6 +117,7 @@
           صنعه بواسطة All-neom.com
         </a>
       </div>
-    <script src="script.js"></script>
+      <script src="script.js"></script>
+    </div>
   </body>
 </html>
