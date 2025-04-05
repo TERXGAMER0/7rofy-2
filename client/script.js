@@ -119,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.head.appendChild(styleElement);
   }
 
-  
   function shuffleLetters() {
     const hexagons = document.querySelectorAll(".changeable");
     const availableLetters = [...arabicLetters];
