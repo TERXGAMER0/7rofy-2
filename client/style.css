@@ -1,47 +1,42 @@
-/* ==================== Activation Overlay Styles ==================== */
+/* تصميم الواجهة الأمنية */
 #secret-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(75, 0, 130, 0.9); /* بنفسجي غامق */
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.secret-container {
-  text-align: center;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-.secret-container h2 {
-  margin-bottom: 15px;
-  font-family: "Simplified Arabic";
-}
-.secret-container input {
-  padding: 10px;
-  font-size: 16px;
-  width: 250px;
-  margin-bottom: 10px;
-  border: 2px solid #000; /* حواف سوداء */
-  border-radius: 8px;     /* زوايا دائرية */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* تأثير ظل بسيط */
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-.secret-container input:focus {
-  border-color: #000;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  outline: none;
-}
-.secret-container button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(75, 0, 130, 0.9); /* بنفسجي غامق */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .secret-container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .secret-container h2 {
+    margin-bottom: 15px;
+    font-family: "Simplified Arabic";
+  }
+  
+  .secret-container input {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    margin-bottom: 10px;
+  }
+  
+  .secret-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
 /* ==================== باقي التنسيقات الخاصة باللعبة ==================== */
 body {
     background-color: #212322;
