@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // --- منطق التحقق من رمز التفعيل ---
+  // التحقق من الرمز السري عبر استدعاء API من الخادم
   document.getElementById("secret-submit").addEventListener("click", function () {
     var code = document.getElementById("secret-code").value.trim();
     fetch('/api/verify', {
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.error("Error during verification:", err));
   });
 
-  // --- منطق اللعبة ---
   const arabicLetters = [
     '\u0627', '\u0628', '\u062A', '\u062B', '\u062C', '\u062D', '\u062E', '\u062F', '\u0630',
     '\u0631', '\u0632', '\u0633', '\u0634', '\u0635', '\u0636', '\u0637', '\u0638', '\u0639',
