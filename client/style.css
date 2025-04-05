@@ -21,16 +21,17 @@
   margin-bottom: 15px;
   font-family: "Simplified Arabic";
 }
-/* تعديل نمط صندوق الإدخال ليظهر دائماً */
+/* تعديل نمط صندوق الإدخال ليكون ظاهر دائمًا وبحواف سوداء */
 .secret-container input {
   display: block;
   padding: 12px 15px;
   font-size: 16px;
   width: 280px;
   margin: 10px auto;
-  border: 2px solid #ddd;
+  border: 2px solid #000;  /* حواف سوداء */
   border-radius: 8px;
   outline: none;
+  background-color: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .secret-container input:focus {
