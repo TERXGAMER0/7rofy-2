@@ -16,26 +16,28 @@
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* إضافة ظل للصندوق */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 .secret-container h2 {
   margin-bottom: 15px;
   font-family: "Simplified Arabic";
 }
+/* تم تعديل هذا الجزء لإضافة حدود وحواف مدورة وظل بسيط */
 .secret-container input {
   padding: 10px;
   font-size: 16px;
   width: 250px;
   margin-bottom: 10px;
-  border: 2px solid #ccc; /* إضافة حواف للمستطيل */
-  border-radius: 5px;     /* جعل الحواف مدورة */
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .secret-container button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  border-radius: 5px; /* حواف مدورة للزر */
+  border-radius: 5px;
   background-color: #007bff;
   color: #fff;
 }
@@ -69,7 +71,6 @@ body {
     0% {
         background-position-x: 0%;
     }
-
     100% {
         background-position-x: 600vw;
     }
