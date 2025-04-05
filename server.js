@@ -26,9 +26,9 @@ app.post('/api/verify', (req, res) => {
   }
 });
 
-// عند الوصول إلى "/" إعادة ملف a1.html من داخل مجلد client
+// عند الوصول إلى "/" إعادة ملف h1-index.html من داخل مجلد client
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'a1.html'));
+  res.sendFile(path.join(__dirname, 'client', 'h1-index.html'));
 });
 
 const PORT = process.env.PORT || 8080;
