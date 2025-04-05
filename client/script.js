@@ -1,318 +1,303 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // --- منطق التحقق من رمز التفعيل ---
-    document.getElementById("secret-submit").addEventListener("click", function () {
-      var code = document.getElementById("secret-code").value.trim();
-      fetch('/api/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: code })
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.valid) {
-            document.getElementById("secret-overlay").style.display = "none";
-          } else {
-            document.getElementById("error-message").style.display = "block";
-          }
-        })
-        .catch(err => console.error("Error during verification:", err));
-    });
-    
-    // --- كود اللعبة الأصلي ---
-    const arabicLetters = [
-      '\u0627', '\u0628', '\u062A', '\u062B', '\u062C', '\u062D', '\u062E', '\u062F', '\u0630',
-      '\u0631', '\u0632', '\u0633', '\u0634', '\u0635', '\u0636', '\u0637', '\u0638', '\u0639',
-      '\u063A', '\u0641', '\u0642', '\u0643', '\u0644', '\u0645', '\u0646', '\u0647', '\u0648', '\u064A'
-    ];
-    const fields = [
-      "جغرافيا", "حيوانات", "عواصم", "مدن", "رياضة", "نباتات", "مشاهير", "تاريخ", "اغاني", "افلام",
-      "العاب", "لغات", "التلفزيون", "تراث", "اكلات", "معلومات عامة", "مصطلحات", "اصوات", "اسلاميات", "عملات",
-      "لاعبين", "الغاز", "اختراعات", "انمي", "تقنية", "ممثلين", "مسلسلات"
-    ];
-    const buttons = Array.from({ length: 25 }, (_, i) => document.getElementById(`btn${i + 1}`));
-    let usedLetters = [];
-    let usedFields = [];
-    let currentMode = "letters"; // الوضع الافتراضي: الحروف
+/* ==================== Activation Overlay Styles ==================== */
+#secret-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(75, 0, 130, 0.9); /* بنفسجي غامق */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .secret-container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .secret-container h2 {
+    margin-bottom: 15px;
+    font-family: "Simplified Arabic";
+  }
+  .secret-container input {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    margin-bottom: 10px;
+    border: 2px solid #000; /* حواف سوداء */
+    border-radius: 8px;     /* زوايا دائرية */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* تأثير ظل بسيط */
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .secret-container input:focus {
+    border-color: #000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    outline: none;
+  }
+  .secret-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
   
-    function getRandomUniqueItems(items, count) {
-      let shuffled = items.sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, count);
-    }
+  /* ==================== باقي التنسيقات الخاصة باللعبة ==================== */
+  body {
+      background-color: #212322;
+  }
   
-    // تخصيص الحروف للأزرار
-    function assignLettersToButtons() {
-      currentMode = "letters";
-      usedLetters = getRandomUniqueItems(arabicLetters, buttons.length);
-      buttons.forEach((btn, index) => {
-        btn.textContent = usedLetters[index];
-        btn.dataset.clickCount = 0;
-        btn.style.fontSize = "50px";
-      });
-    }
+  @font-face {
+      font-family: ltBukraBold;
+      src: url(fonts/29ltbukrabold.otf);
+  }
   
-    // تخصيص المجالات للأزرار
-    function assignFieldsToButtons() {
-      currentMode = "fields";
-      usedFields = getRandomUniqueItems(fields, buttons.length);
-      buttons.forEach((btn, index) => {
-        btn.textContent = usedFields[index];
-        btn.dataset.clickCount = 0;
-        btn.style.fontSize = "20px";
-      });
-    }
+  @font-face {
+      font-family: 'AlHurraBold';
+      src: url('fonts/AlHurraFontBold.ttf');
+  }
   
-    function btnClick(buttonId) {
-      const button = document.getElementById(buttonId);
-      const currentBackgroundColor = window.getComputedStyle(button).backgroundColor;
-      const buttonIndex = Number(buttonId.slice(3)) - 1;
-      let newColor = "noColor";
-      if (currentBackgroundColor === "rgb(246, 241, 238)") {
-        newColor = "#45eb04";
-        button.style.backgroundColor = newColor;
-        button.style.color = "transparent";
-        updateDynamicStyles(buttonId, newColor);
-      } else if (currentBackgroundColor === "rgb(69, 235, 4)") {
-        newColor = "#c80000";
-        button.style.backgroundColor = newColor;
-        button.style.color = "transparent";
-        updateDynamicStyles(buttonId, newColor);
-      } else if (currentBackgroundColor === "rgb(200, 0, 0)") {
-        newColor = "#f6f1ee";
-        button.style.backgroundColor = newColor;
-        button.style.color = "#000080";
-        if (currentMode === "letters") {
-          button.textContent = usedLetters[buttonIndex];
-        } else if (currentMode === "fields") {
-          button.textContent = usedFields[buttonIndex];
-        }
-        updateDynamicStyles(buttonId, newColor);
+  @font-face {
+      font-family: 'AlHurraReg';
+      src: url('fonts/AlHurraFontRegular.ttf');
+  }
+  
+  @font-face {
+      font-family: 'Dimbo';
+      src: url('fonts/Dimbo.ttf');
+  }
+  
+  @keyframes slide {
+      0% {
+          background-position-x: 0%;
       }
-      button.dataset.clickCount = (parseInt(button.dataset.clickCount) + 1) % 3;
-    }
-  
-    function updateDynamicStyles(buttonId, color) {
-      addDynamicStyle(`#${buttonId}:before`, `
-        position: absolute;
-        top: -25px;
-        left: 0;
-        width: 0;
-        height: 0;
-        border-left: 50px solid transparent;
-        border-right: 50px solid transparent;
-        border-bottom: 25.5px solid ${color};
-      `);
-      addDynamicStyle(`#${buttonId}:after`, `
-        position: absolute;
-        bottom: -25px;
-        left: 0;
-        width: 0;
-        height: 0;
-        border-left: 50px solid transparent;
-        border-right: 50px solid transparent;
-        border-top: 25.5px solid ${color};
-      `);
-    }
-  
-    function addDynamicStyle(selector, styles) {
-      const styleElement = document.createElement("style");
-      styleElement.innerHTML = `${selector} { ${styles} }`;
-      document.head.appendChild(styleElement);
-    }
-  
-    
-    function shuffleLetters() {
-      const hexagons = document.querySelectorAll(".changeable");
-      const availableLetters = [...arabicLetters];
-      const shuffled = [];
-      for (let i = 0; i < hexagons.length; i++) {
-        const randomIndex = Math.floor(Math.random() * availableLetters.length);
-        shuffled.push(availableLetters[randomIndex]);
-        availableLetters.splice(randomIndex, 1);
+      100% {
+          background-position-x: 600vw;
       }
-      hexagons.forEach((hex, index) => {
-        hex.classList.add("fade");
-        setTimeout(() => {
-          hex.textContent = shuffled[index];
-          hex.dataset.letter = shuffled[index];
-          hex.style.backgroundColor = "#ffffe0";
-          hex.classList.remove("fade");
-        }, 50 * index);
-      });
-      stopPartyMode();
-    }
+  }
   
-    function swapColors() {
-      const redHexagons = document.querySelectorAll(".red-fixed");
-      const greenHexagons = document.querySelectorAll(".green-fixed");
-      const changeableHexagons = document.querySelectorAll(".changeable");
-      const currentSet = colorSets[currentColorSetIndex];
-      redHexagons.forEach((hex) => {
-        hex.classList.remove("red-fixed");
-        hex.classList.add("green-fixed");
-        hex.style.backgroundColor = currentSet.green;
-      });
-      greenHexagons.forEach((hex) => {
-        hex.classList.remove("green-fixed");
-        hex.classList.add("red-fixed");
-        hex.style.backgroundColor = currentSet.red;
-      });
-      changeableHexagons.forEach((hex) => {
-        const currentColor = rgbToHex(hex.style.backgroundColor);
-        if (currentColor === currentSet.red) {
-          hex.style.backgroundColor = currentSet.green;
-        } else if (currentColor === currentSet.green) {
-          hex.style.backgroundColor = currentSet.red;
-        }
-      });
-    }
+  .hexbuttons {
+      position: absolute;
+      left: 148px;
+      margin-top: 100px;
+      padding: 50px 0 0 5px;
+      width: 579px;
+      height: 414px;
+      border-top: 50px solid #45eb04;
+      border-bottom: 50px solid #45eb04;
+      border-left: 50px solid #c80000;
+      border-right: 50px solid #c80000;
+  }
   
-    function changeColorSet() {
-      const oldSet = colorSets[currentColorSetIndex];
-      currentColorSetIndex = (currentColorSetIndex + 1) % colorSets.length;
-      const currentSet = colorSets[currentColorSetIndex];
-      const redHexagons = document.querySelectorAll(".red-fixed");
-      const greenHexagons = document.querySelectorAll(".green-fixed");
-      const changeableHexagons = document.querySelectorAll(".changeable");
-      redHexagons.forEach((hex) => {
-        hex.classList.add("color-transition");
-        hex.style.backgroundColor = currentSet.red;
-      });
-      greenHexagons.forEach((hex) => {
-        hex.classList.add("color-transition");
-        hex.style.backgroundColor = currentSet.green;
-      });
-      changeableHexagons.forEach((hex) => {
-        hex.classList.add("color-transition");
-        const currentColor = rgbToHex(hex.style.backgroundColor);
-        if (currentColor === oldSet.red) {
-          hex.style.backgroundColor = currentSet.red;
-        } else if (currentColor === oldSet.green) {
-          hex.style.backgroundColor = currentSet.green;
-        }
-      });
-      setTimeout(() => {
-        document.querySelectorAll(".color-transition").forEach((hex) => {
-          hex.classList.remove("color-transition");
-        });
-      }, 500);
-      stopPartyMode();
-    }
+  .hexr {
+      height: 100px;
+      margin-top: -15px;
+  }
   
-    function partyMode() {
-      if (partyInterval) return;
-      const partyText = document.getElementById("partyText");
-      const body = document.body;
-      partySound.currentTime = 0;
-      partySound.play().catch((err) => console.error("فشل تشغيل الصوت:", err));
-      partyText.style.display = "block";
-      body.classList.add("active");
-      document.querySelectorAll(".hexagon").forEach((hex) => {
-        hex.classList.add("color-transition");
-      });
-      partyInterval = setInterval(() => {
-        swapColors();
-        const currentSet = colorSets[currentColorSetIndex];
-        const currentTextColor = rgbToHex(partyText.style.color);
-        partyText.style.color = currentTextColor === "#ffd700" ? currentSet.red : "#ffd700";
-      }, 300);
-      setTimeout(() => {
-        stopPartyMode();
-      }, 5000);
-    }
+  .hexr:nth-child(even) {
+      margin-left: 53px;
+      width: 600px;
+  }
   
-    function stopPartyMode() {
-      if (partyInterval) {
-        clearInterval(partyInterval);
-        partyInterval = null;
-        document.querySelectorAll(".hexagon").forEach((hex) => {
-          hex.classList.remove("color-transition");
-        });
-        document.getElementById("partyText").style.display = "none";
-        document.body.classList.remove("active");
-        partySound.pause();
-        partySound.currentTime = 0;
-      }
-    }
+  .btn1, .btn2, .btn3, .btn4, .btn5,
+  .btn6, .btn7, .btn8, .btn9, .btn10,
+  .btn11, .btn12, .btn13, .btn14, .btn15,
+  .btn16, .btn17, .btn18, .btn19, .btn20,
+  .btn21, .btn22, .btn23, .btn24, .btn25 {
+      background: #f6f1ee;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      font-size: 36px;
+      height: 55px;
+      margin: 0 5px 0 0;
+      position: relative;
+      width: 100px;
+      color: #000080;
+      font-weight: bold;
+      user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -o-user-select: none;
+  }
   
-    document.addEventListener("click", (e) => {
-      const hex = e.target;
-      if (hex.classList.contains("changeable")) {
-        const currentColor = rgbToHex(hex.style.backgroundColor);
-        const currentSet = colorSets[currentColorSetIndex];
-        let newColor;
-        if (currentColor === "#ffffe0") {
-          newColor = "#ffa500";
-        } else if (currentColor === "#ffa500") {
-          newColor = currentSet.green;
-        } else if (currentColor === currentSet.green) {
-          newColor = currentSet.red;
-        } else if (currentColor === currentSet.red) {
-          newColor = "#ffffe0";
-        } else {
-          newColor = "#ffffe0";
-        }
-        hex.style.backgroundColor = newColor;
-      }
-    });
+  .btn1:before, .btn2:before, .btn3:before, .btn4:before, .btn5:before,
+  .btn6:before, .btn7:before, .btn8:before, .btn9:before, .btn10:before,
+  .btn11:before, .btn12:before, .btn13:before, .btn14:before, .btn15:before,
+  .btn16:before, .btn17:before, .btn18:before, .btn19:before, .btn20:before,
+  .btn21:before, .btn22:before, .btn23:before, .btn24:before, .btn25:before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 25.5px solid #f6f1ee;
+  }
   
-    function copyLetters() {
-      const changeableHexagons = document.querySelectorAll(".changeable");
-      let letterText = "";
-      changeableHexagons.forEach((hex) => {
-        letterText += hex.textContent + " ";
-      });
-      navigator.clipboard.writeText(letterText.trim())
-        .then(() => {
-          alert("تم نسخ الحروف بنجاح!");
-        })
-        .catch((err) => {
-          console.error("فشل في النسخ: ", err);
-          alert("حدث خطأ أثناء النسخ.");
-        });
-    }
+  .btn1:after, .btn2:after, .btn3:after, .btn4:after, .btn5:after,
+  .btn6:after, .btn7:after, .btn8:after, .btn9:after, .btn10:after,
+  .btn11:after, .btn12:after, .btn13:after, .btn14:after, .btn15:after,
+  .btn16:after, .btn17:after, .btn18:after, .btn19:after, .btn20:after,
+  .btn21:after, .btn22:after, .btn23:after, .btn24:after, .btn25:after {
+      content: "";
+      position: absolute;
+      bottom: -25px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-top: 25.5px solid #f6f1ee;
+  }
   
-    document.getElementById("shuffleLettersBtn").addEventListener("click", assignLettersToButtons);
-    document.getElementById("addFieldsBtn").addEventListener("click", assignFieldsToButtons);
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", function () {
-        btnClick(btn.id);
-      });
-    });
-    // تهيئة اللعبة بالافتراضي (الحروف)
-    assignLettersToButtons();
-  });
+  .trinagle-down {
+      width: 0;
+      height: 0;
+      border-bottom: 30px solid #45eb04;
+      margin-top: 585px;
+      position: absolute;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      z-index: 9;
+  }
   
-  /* الكود الخاص بتهيئة إطار تحدي Cloudflare - تركه كما هو */
-  (function () {
-    function c() {
-      var b = a.contentDocument || a.contentWindow.document;
-      if (b) {
-        var d = b.createElement("script");
-        d.innerHTML =
-          "window.__CF$cv$params={r:'924a89600f9644de',t:'MTc0MjY5NzMzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-        b.getElementsByTagName("head")[0].appendChild(d);
-      }
-    }
-    if (document.body) {
-      var a = document.createElement("iframe");
-      a.height = 1;
-      a.width = 1;
-      a.style.position = "absolute";
-      a.style.top = 0;
-      a.style.left = 0;
-      a.style.border = "none";
-      a.style.visibility = "hidden";
-      document.body.appendChild(a);
-      if ("loading" !== document.readyState) c();
-      else if (window.addEventListener)
-        document.addEventListener("DOMContentLoaded", c);
-      else {
-        var e = document.onreadystatechange || function () {};
-        document.onreadystatechange = function (b) {
-          e(b);
-          "loading" !== document.readyState &&
-            ((document.onreadystatechange = e), c());
-        };
-      }
-    }
-  })();
+  .trinagle-up {
+      width: 0;
+      height: 0;
+      border-top: 30px solid #45eb04;
+      margin-top: 150px;
+      position: absolute;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      z-index: 9;
+  }
+  
+  .trinagle-left {
+      width: 0;
+      height: 55px;
+      border-left: 30px solid #c80000;
+      border-width: 55px;
+      position: absolute;
+      left: 195px;
+      border-top: 27px solid transparent;
+      border-bottom: 27px solid transparent;
+      z-index: 9;
+  }
+  
+  .trinagle-right {
+      width: 0;
+      height: 55px;
+      border-right: 30px solid #c80000;
+      border-width: 55px;
+      position: absolute;
+      left: 728.66px;
+      border-top: 27px solid transparent;
+      border-bottom: 27px solid transparent;
+      z-index: 9;
+  }
+  
+  .end-left {
+      width: 0;
+      height: 55px;
+      border-left: 30px solid #c80000;
+      border-width: 50px;
+      position: absolute;
+      left: 148px;
+      z-index: 10;
+  }
+  
+  .end-right {
+      width: 0;
+      height: 55px;
+      border-right: 30px solid #c80000;
+      border-width: 103px;
+      position: absolute;
+      left: 728.5px;
+      border-top: 27px solid transparent;
+      border-bottom: 27px solid transparent;
+      z-index: 9;
+  }
+  
+  #controls {
+      text-align: center;
+      border-top: 30px;
+      top: 20px;
+      left: 350px;
+      position: absolute;
+  }
+  
+  .control-btn {
+      font-family: 'AlHurraBold';
+      font-size: 22px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+  }
+  
+  .qpage {
+      font-family: 'AlHurraBold';
+      font-size: 22px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      border-top: 30px;
+      top: 760px;
+      left: 400px;
+      position: absolute;
+  }
+  
+  .team1 {
+      font-family: 'AlHurraBold';
+      text-align: center;
+      position: absolute;
+      top: 60px;
+      left: 140px;
+      background-color: transparent;
+      color: #45eb04;
+      font-size: 16px;
+  }
+  
+  .team1::placeholder {
+      color: #45eb04;
+  }
+  
+  .team2 {
+      font-family: 'AlHurraBold';
+      text-align: center;
+      position: absolute;
+      top: 60px;
+      left: 640px;
+      background-color: transparent;
+      color: #c80000;
+      font-size: 16px;
+  }
+  
+  .team2::placeholder {
+      color: #c80000;
+  }
+  
+  input[type="text"] {
+      border: none;
+      outline: none;
+  }
+  
+  .bottompage {
+      position: absolute;
+      left: 148px;
+      margin-top: 100px;
+      padding: 50px 0 0 5px;
+  }
