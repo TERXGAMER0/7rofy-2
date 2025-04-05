@@ -22,13 +22,13 @@
   margin-bottom: 15px;
   font-family: "Simplified Arabic";
 }
-/* تم تعديل هذا الجزء لإضافة حدود وحواف مدورة وظل بسيط */
+/* تم تعديل هذا الجزء ليصبح لصندوق الإدخال حواف سوداء */
 .secret-container input {
   padding: 10px;
   font-size: 16px;
   width: 250px;
   margin-bottom: 10px;
-  border: 2px solid #ccc;
+  border: 2px solid #000;  /* حواف سوداء */
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -71,6 +71,7 @@ body {
     0% {
         background-position-x: 0%;
     }
+
     100% {
         background-position-x: 600vw;
     }
