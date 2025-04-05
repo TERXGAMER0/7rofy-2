@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
   <head>
     <title>خلية سباق الحروف - مجالات</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Style.css">
     <link rel="icon" type="image/x-icon" href="logo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
   </head>
@@ -11,7 +11,7 @@
     <!-- واجهة التحقق من الرمز السري -->
     <div id="secret-overlay">
       <div class="secret-container">
-        <h2>أدخل رمز التفعيل للدخول</h2>
+        <h2>أدخل رمز التفعيل المجاني للدخول</h2>
         <input type="text" id="secret-code" placeholder="الرمز السري" />
         <br />
         <button id="secret-submit">ادخال</button>
@@ -19,13 +19,10 @@
           رمز خاطئ، حاول مرة أخرى
         </p>
         <p style="font-size: 17px; margin-top: 10px">
-          اذا لم يكن لديك رمز تفعيل ، يمكنك الحصول عليه مجانًا في بوت التيليجرام هذا هو الرابط
+          اذا لم يكن لديك رمز تفعيل ، يمكنك الحصول عليه مجانًا في بوت في التيليجرام هذا هو الرابط
           <a href="https://t.me/ii40TSM_bot" target="_blank">اضغط هنا</a>
         </p>
       </div>
-    </div>
-
-    <!-- قد يكون هناك عنصر مغلق زائداً؛ يُمكنك مراجعته إذا لزم الأمر -->
     </div>
 
     <!-- نموذج الإدخال للفِرَق -->
@@ -33,14 +30,15 @@
       <input type="text" class="team1" placeholder="الفريق الاخضر">
       <input type="text" class="team2" placeholder="الفريق الاحمر">
     </form>
-
-    <!-- المحتوى الرئيسي للعبة -->
+    
+    <!-- عناصر التحكم للعبة -->
     <div id="controls">
       <!-- زر إعادة توزيع الحروف -->
       <button id="shuffleLettersBtn" class="control-btn">حروف</button>
       <!-- زر إضافة المجالات -->
       <button id="addFieldsBtn" class="control-btn">مجالات</button>
     </div>
+    
     <div id="gameDiv" style="display: 0;">
       <div class="trinagle-up" style="left:158px;border-left: 40px solid transparent !important;"></div>
       <div class="trinagle-up" style="left:245px;"></div>
