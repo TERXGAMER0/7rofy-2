@@ -1,0 +1,303 @@
+/* ==================== Activation Overlay Styles ==================== */
+#secret-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(75, 0, 130, 0.9); /* بنفسجي غامق */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.secret-container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+.secret-container h2 {
+    margin-bottom: 15px;
+    font-family: "Simplified Arabic";
+}
+.secret-container input {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    margin-bottom: 10px;
+    border: 2px solid #000; /* حواف سوداء */
+    border-radius: 8px;     /* زوايا دائرية */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* تأثير ظل بسيط */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.secret-container input:focus {
+    border-color: #000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+.secret-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ==================== باقي التنسيقات الخاصة باللعبة ==================== */
+body {
+    background-color: #212322;
+}
+
+@font-face {
+    font-family: ltBukraBold;
+    src: url(fonts/29ltbukrabold.otf);
+}
+
+@font-face {
+    font-family: 'AlHurraBold';
+    src: url('fonts/AlHurraFontBold.ttf');
+}
+
+@font-face {
+    font-family: 'AlHurraReg';
+    src: url('fonts/AlHurraFontRegular.ttf');
+}
+
+@font-face {
+    font-family: 'Dimbo';
+    src: url('fonts/Dimbo.ttf');
+}
+
+@keyframes slide {
+    0% {
+        background-position-x: 0%;
+    }
+    100% {
+        background-position-x: 600vw;
+    }
+}
+
+.hexbuttons {
+    position: absolute;
+    left: 148px;
+    margin-top: 100px;
+    padding: 50px 0 0 5px;
+    width: 579px;
+    height: 414px;
+    border-top: 50px solid #45eb04;
+    border-bottom: 50px solid #45eb04;
+    border-left: 50px solid #c80000;
+    border-right: 50px solid #c80000;
+}
+
+.hexr {
+    height: 100px;
+    margin-top: -15px;
+}
+
+.hexr:nth-child(even) {
+    margin-left: 53px;
+    width: 600px;
+}
+
+.btn1, .btn2, .btn3, .btn4, .btn5,
+.btn6, .btn7, .btn8, .btn9, .btn10,
+.btn11, .btn12, .btn13, .btn14, .btn15,
+.btn16, .btn17, .btn18, .btn19, .btn20,
+.btn21, .btn22, .btn23, .btn24, .btn25 {
+    background: #f6f1ee;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    font-size: 36px;
+    height: 55px;
+    margin: 0 5px 0 0;
+    position: relative;
+    width: 100px;
+    color: #000080;
+    font-weight: bold;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+.btn1:before, .btn2:before, .btn3:before, .btn4:before, .btn5:before,
+.btn6:before, .btn7:before, .btn8:before, .btn9:before, .btn10:before,
+.btn11:before, .btn12:before, .btn13:before, .btn14:before, .btn15:before,
+.btn16:before, .btn17:before, .btn18:before, .btn19:before, .btn20:before,
+.btn21:before, .btn22:before, .btn23:before, .btn24:before, .btn25:before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 25.5px solid #f6f1ee;
+}
+
+.btn1:after, .btn2:after, .btn3:after, .btn4:after, .btn5:after,
+.btn6:after, .btn7:after, .btn8:after, .btn9:after, .btn10:after,
+.btn11:after, .btn12:after, .btn13:after, .btn14:after, .btn15:after,
+.btn16:after, .btn17:after, .btn18:after, .btn19:after, .btn20:after,
+.btn21:after, .btn22:after, .btn23:after, .btn24:after, .btn25:after {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 25.5px solid #f6f1ee;
+}
+
+.trinagle-down {
+    width: 0;
+    height: 0;
+    border-bottom: 30px solid #45eb04;
+    margin-top: 585px;
+    position: absolute;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    z-index: 9;
+}
+
+.trinagle-up {
+    width: 0;
+    height: 0;
+    border-top: 30px solid #45eb04;
+    margin-top: 150px;
+    position: absolute;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    z-index: 9;
+}
+
+.trinagle-left {
+    width: 0;
+    height: 55px;
+    border-left: 30px solid #c80000;
+    border-width: 55px;
+    position: absolute;
+    left: 195px;
+    border-top: 27px solid transparent;
+    border-bottom: 27px solid transparent;
+    z-index: 9;
+}
+
+.trinagle-right {
+    width: 0;
+    height: 55px;
+    border-right: 30px solid #c80000;
+    border-width: 55px;
+    position: absolute;
+    left: 728.66px;
+    border-top: 27px solid transparent;
+    border-bottom: 27px solid transparent;
+    z-index: 9;
+}
+
+.end-left {
+    width: 0;
+    height: 55px;
+    border-left: 30px solid #c80000;
+    border-width: 50px;
+    position: absolute;
+    left: 148px;
+    z-index: 10;
+}
+
+.end-right {
+    width: 0;
+    height: 55px;
+    border-right: 30px solid #c80000;
+    border-width: 103px;
+    position: absolute;
+    left: 728.5px;
+    border-top: 27px solid transparent;
+    border-bottom: 27px solid transparent;
+    z-index: 9;
+}
+
+#controls {
+    text-align: center;
+    border-top: 30px;
+    top: 20px;
+    left: 350px;
+    position: absolute;
+}
+
+.control-btn {
+    font-family: 'AlHurraBold';
+    font-size: 22px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.qpage {
+    font-family: 'AlHurraBold';
+    font-size: 22px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    border-top: 30px;
+    top: 760px;
+    left: 400px;
+    position: absolute;
+}
+
+.team1 {
+    font-family: 'AlHurraBold';
+    text-align: center;
+    position: absolute;
+    top: 60px;
+    left: 140px;
+    background-color: transparent;
+    color: #45eb04;
+    font-size: 16px;
+}
+
+.team1::placeholder {
+    color: #45eb04;
+}
+
+.team2 {
+    font-family: 'AlHurraBold';
+    text-align: center;
+    position: absolute;
+    top: 60px;
+    left: 640px;
+    background-color: transparent;
+    color: #c80000;
+    font-size: 16px;
+}
+
+.team2::placeholder {
+    color: #c80000;
+}
+
+input[type="text"] {
+    border: none;
+    outline: none;
+}
+
+.bottompage {
+    position: absolute;
+    left: 148px;
+    margin-top: 100px;
+    padding: 50px 0 0 5px;
+}
