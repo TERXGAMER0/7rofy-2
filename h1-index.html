@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <title>خلية سباق الحروف - مجالات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- واجهة التحقق من الرمز السري (مطابقة للعبة الثانية) -->
+    <div id="secret-overlay">
+      <div class="secret-container">
+        <h2>أدخل رمز التفعيل المجاني للدخول</h2>
+        <input type="text" id="secret-code" placeholder="الرمز السري" />
+        <br />
+        <button id="secret-submit">ادخال</button>
+        <p id="error-message" style="color: red; display: none">
+          رمز خاطئ، حاول مرة أخرى
+        </p>
+        <p style="font-size: 17px; margin-top: 10px">
+          اذا لم يكن لديك رمز تفعيل، يمكنك الحصول عليه مجانًا في بوت التيليجرام؛
+          <a href="https://t.me/ii40TSM_bot" target="_blank">اضغط هنا</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- نموذج الإدخال للفِرَق -->
+    <form>
+      <input type="text" class="team1" placeholder="الفريق الاخضر">
+      <input type="text" class="team2" placeholder="الفريق الاحمر">
+    </form>
+
+    <!-- المحتوى الرئيسي للعبة -->
+    <div id="controls">
+      <button id="shuffleLettersBtn" class="control-btn">حروف</button>
+      <button id="addFieldsBtn" class="control-btn">مجالات</button>
+    </div>
+    <div id="gameDiv" style="display: 0;">
+      <div class="trinagle-up" style="left:158px;border-left: 40px solid transparent !important;"></div>
+      <div class="trinagle-up" style="left:245px;"></div>
+      <div class="trinagle-up" style="left:349.5px;"></div>
+      <div class="trinagle-up" style="left:455px;"></div>
+      <div class="trinagle-up" style="left:560px;"></div>
+      <div class="trinagle-up" style="left:665.5px;"></div>
+      
+      <div class="trinagle-down" style="left:158px;border-left: 40px solid transparent !important;"></div>
+      <div class="trinagle-down" style="left:245px;"></div>
+      <div class="trinagle-down" style="left:349.5px;"></div>
+      <div class="trinagle-down" style="left:455px;"></div>
+      <div class="trinagle-down" style="left:560px;"></div>
+      <div class="trinagle-down" style="left:665.5px;"></div>
+    
+      <div class="trinagle-left" style="margin-top: 243px;"></div>
+      <div class="trinagle-left" style="margin-top: 413px;"></div>
+      
+      <div class="trinagle-right" style="margin-top: 158px;"></div>
+      <div class="trinagle-right" style="margin-top: 328px;"></div>
+      <div class="trinagle-right" style="margin-top: 498.5px;"></div>
+      
+      <div class="end-left" style="margin-top: 99px;border-top: 81px solid transparent;"></div>
+      <div class="end-left" style="margin-top: 529px;border-bottom: 81px solid transparent;"></div>
+      
+      <div class="trinagle-down" style="left:147.2px;margin-top: 614px !important;border-width:50px;width: 100px !important;border-left: 10px solid transparent !important;"></div>
+      <div class="trinagle-up" style="left:147.2px;margin-top: 100px !important;border-width:50px;width: 100px !important;border-right: 10px solid transparent !important;border-left: 20px solid transparent !important;"></div>	
+    
+      <div class="end-right" style="margin-top: 99px;border-top: 81px solid transparent;"></div>
+      <div class="end-right" style="margin-top: 504px;border-bottom: 78px solid transparent;"></div>
+      
+      <div class="trinagle-down" style="left:147.2px;margin-top: 614px !important;border-width:50px;width: 100px !important;border-left: 10px solid transparent !important;"></div>
+      <div class="trinagle-up" style="left:147.2px;margin-top: 100px !important;border-width:50px;width: 100px !important;border-right: 10px solid transparent !important;border-left: 20px solid transparent !important;"></div>	
+    
+      <div class="hexbuttons">
+        <div class="hexr">
+          <div id="btn1" class="btn1" onclick="btnClick(this.id)"></div>
+          <div id="btn2" class="btn2" onclick="btnClick(this.id)"></div>
+          <div id="btn3" class="btn3" onclick="btnClick(this.id)"></div>
+          <div id="btn4" class="btn4" onclick="btnClick(this.id)"></div>
+          <div id="btn5" class="btn5" onclick="btnClick(this.id)"></div>
+        </div>
+        <div class="hexr">
+          <div id="btn6" class="btn6" onclick="btnClick(this.id)"></div>
+          <div id="btn7" class="btn7" onclick="btnClick(this.id)"></div>
+          <div id="btn8" class="btn8" onclick="btnClick(this.id)"></div>
+          <div id="btn9" class="btn9" onclick="btnClick(this.id)"></div>
+          <div id="btn10" class="btn10" onclick="btnClick(this.id)"></div>
+        </div>
+        <div class="hexr">
+          <div id="btn11" class="btn11" onclick="btnClick(this.id)"></div>
+          <div id="btn12" class="btn12" onclick="btnClick(this.id)"></div>
+          <div id="btn13" class="btn13" onclick="btnClick(this.id)"></div>
+          <div id="btn14" class="btn14" onclick="btnClick(this.id)"></div>
+          <div id="btn15" class="btn15" onclick="btnClick(this.id)"></div>
+        </div>
+        <div class="hexr">
+          <div id="btn16" class="btn16" onclick="btnClick(this.id)"></div>
+          <div id="btn17" class="btn17" onclick="btnClick(this.id)"></div>
+          <div id="btn18" class="btn18" onclick="btnClick(this.id)"></div>
+          <div id="btn19" class="btn19" onclick="btnClick(this.id)"></div>
+          <div id="btn20" class="btn20" onclick="btnClick(this.id)"></div>
+        </div>
+        <div class="hexr">
+          <div id="btn21" class="btn21" onclick="btnClick(this.id)"></div>
+          <div id="btn22" class="btn22" onclick="btnClick(this.id)"></div>
+          <div id="btn23" class="btn23" onclick="btnClick(this.id)"></div>
+          <div id="btn24" class="btn24" onclick="btnClick(this.id)"></div>
+          <div id="btn25" class="btn25" onclick="btnClick(this.id)"></div>
+        </div>
+      </div>
+      <div style="position: fixed; bottom: 10px; right: 10px; z-index: 1000; display: flex; align-items: center; background: rgba(0, 0, 0, 0.7); padding: 5px 10px; border-radius: 5px;">
+        <a href="https://www.tiktok.com/@jifn" target="_blank" style="text-decoration: none; color: white; font-size: 12px; display: flex; align-items: center; font-family: 'ltBukraBold', sans-serif;">
+          <img src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/3d907ec3b7efe95edf4869ae46b80ffc~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=9e81b2bd&x-expires=1743994800&x-signature=jjqKk9RgQYzYUv7T2RQsmnZx%2Bmo%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2" alt="Mfatihy Logo" style="width: 15px; height: 15px; margin-right: 5px;">
+          jifn للأستفسار (حساب التيك توك)
+        </a>
+      </div>
+      <script src="script.js"></script>
+    </div>
+  </body>
+</html>
